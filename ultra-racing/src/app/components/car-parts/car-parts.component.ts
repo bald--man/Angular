@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CarPart } from './car-part';
+import { CARPARTS } from './mocks';
 
 @Component({
   selector: 'car-parts',
@@ -7,33 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CarPartsComponent /*implements OnInit*/ {
 
+  carParts: CarPart[];
+
   //constructor() { }
 
-  //ngOnInit() {}
-
-  carParts = [
-    {
-      "id": 1,
-      "name": "Super Tires",
-      "description": "These tires are the very best",
-      "inStock": 5,
-      "price": 3.29
-    },
-    {
-      "id": 2,
-      "name": "Reinforced Shocks",
-      "description": "Shocks made from kryptonite",
-      "inStock": 4,
-      "price": 4.99
-    },
-    {
-      "id": 3,
-      "name": "Reinforced Shocks XL",
-      "description": "Made from kryptonite-Z",
-      "inStock": 0,
-      "price": 7.25
-    }
-  ];
+  ngOnInit() {
+    this.carParts = CARPARTS;
+  }
 
   totalCarParts() {
     let sum = 0;
