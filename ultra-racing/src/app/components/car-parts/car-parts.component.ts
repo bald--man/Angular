@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CarPart } from './car-part';
 import { CARPARTS } from './mocks';
+import { RacingDataService } from './racing-data.service';
 
 @Component({
   selector: 'car-parts',
@@ -11,10 +12,13 @@ export class CarPartsComponent /*implements OnInit*/ {
 
   carParts: CarPart[];
 
-  //constructor() { }
+  constructor(private racingDataService: RacingDataService) { }
 
   ngOnInit() {
-    this.carParts = CARPARTS;
+    //this.carParts = CARPARTS;
+    //let racingDataService = new RacingDataService();
+    //this.carParts = racingDataService.getCarParts();
+    this.carParts = this.racingDataService.getCarParts();
   }
 
   totalCarParts() {
