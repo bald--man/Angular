@@ -18,7 +18,8 @@ export class CarPartsComponent /*implements OnInit*/ {
     //this.carParts = CARPARTS;
     //let racingDataService = new RacingDataService();
     //this.carParts = racingDataService.getCarParts();
-    this.carParts = this.racingDataService.getCarParts();
+    //this.carParts = this.racingDataService.getCarParts();
+    this.racingDataService.getCarParts().subscribe(carParts => this.carParts = carParts);
   }
 
   totalCarParts() {
@@ -28,7 +29,14 @@ export class CarPartsComponent /*implements OnInit*/ {
     }
     return sum;*/
     //return this.carParts.reduce(function(prev, current) { return prev + current.inStock; }, 0 );
-    return this.carParts.reduce((prev, current) => prev + current.inStock, 0 );
+    //return this.carParts.reduce((prev, current) => prev + current.inStock, 0 );
+
+    if (Array.isArray(this.carParts)) {
+      for (let carPart of this.carParts) {
+        sum += carPart.inStock;
+      }
+    }
+    return sum;
   }
 
   upQuantity( carPart ) {
