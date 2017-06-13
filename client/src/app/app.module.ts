@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app.routing';
 import { VideoDetailComponent } from './video-detail/video-detail.component';
 import { VideoListComponent } from './video-list/video-list.component';
 
@@ -13,7 +14,9 @@ import { VideoListComponent } from './video-list/video-list.component';
     VideoListComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
