@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
 
 // third party imports
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -29,6 +30,7 @@ import { SearchComponent } from './search/search.component';
     CarouselModule.forRoot(),
     BrowserModule,
     HttpModule,
+    FormsModule,
     AppRoutingModule
   ],
   providers: [],
