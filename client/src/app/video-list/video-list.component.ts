@@ -10,15 +10,15 @@ import { VideoService } from '../videos/videos.service';
 })
 export class VideoListComponent implements OnInit, OnDestroy {
     private req: any;
-    title = "Video List";
-    someItem = "<h1>Hi there</h1>";
+    //title = "Video List";
+    //someItem = "<h1>Hi there</h1>";
     todayDate;
     videoList:[any];
 
   constructor(private _video:VideoService) { }
 
   ngOnInit() {
-    this.todayDate = new Date()
+    //this.todayDate = new Date()
     this.req = this._video.list().subscribe(data=>{
       console.log(data)
       this.videoList = data as [any];

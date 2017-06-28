@@ -7,35 +7,49 @@ import 'rxjs/add/operator/catch';
 const endpoint = 'assets/json/videos.json' // http://www.yourdomain.com/api/videos/
 
 @Injectable()
- export class VideoService {
+export class VideoService {
 
-   constructor(private http: Http) {}
+  constructor(private http: Http) { }
 
-   list(){
-     return this.http.get(endpoint)
-            .map(response=>response.json())
-            .catch(this.handleError)
-   }
+  list() {
+    return this.http.get(endpoint)
+      .map(response => response.json())
+      .catch(this.handleError)
+  }
 
-   get(slug){
-     return this.http.get(endpoint)
-            .map(response=>{
-              let data = response.json().filter(item=>{
-                if (item.slug == slug) {
-                  //console.log(item)
-                  return item
-                }
-              })
-              if (data.length == 1){
-                return data[0]
-              }
-              return {}
-            })
-            .catch(this.handleError)
-   }
+  get(slug) {
+    return this.http.get(endpoint)
+               .map(response => {
+                 let data = response.json().filter(item => {
+                   if (item.slug == slug) {
+                   //console.log(item)
+                     return item
+                   }
+                 })
+                 if (data.length == 1) {
+                   return data[0]
+                 }
+                 return {}
+               })
+               .catch(this.handleError)
+  }
 
-   private handleError(error:any, caught:any): any{
-     console.log(error, caught)
-   }
+  search(query){
+    return this.http.get(endpoint)
+               .map(response=>{
+                  let data = []
+                  let req = response.json().filter(item=>{
+                    if (item.name.indexOf(query) >=0) {
+                      data.push(item)
+                    }
+                  })
+                 return data
+               })
+               .catch(this.handleError)
+  }
 
- }
+  private handleError(error: any, caught: any): any {
+    console.log(error, caught)
+  }
+
+}
