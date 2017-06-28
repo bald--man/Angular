@@ -2,29 +2,27 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Http } from '@angular/http';
 
+import { VideoItem } from '../videos/video';
+import { VideoService } from '../videos/videos.service';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  providers: [VideoService]
 })
 export class HomeComponent implements OnInit, OnDestroy {
    private req: any;
-   homeImageList = [
-     /*
-        {image: "assets/images/nature/4.jpg", title:"Image 4", link:'/videos/video-1'},
-        {image: "assets/images/nature/5.jpg", title:"Image 5", link:'/videos/video-1'},
-        {image: "assets/images/nature/6.jpg", title:"Image 6", link:'/videos/video-1'},
-        {image: "assets/images/nature/1.jpg", title:"Image 1", link:'/videos/video-1'}
-        */
-   ]
-  constructor(private http:Http, private router:Router) { }
+   homeImageList:[VideoItem] = [] as [VideoItem]
+   constructor(private http:Http, private router:Router, private _video:VideoService) { }
 
   ngOnInit() {
-    this.req = this.http.get('assets/json/videos.json').subscribe(data=>{
+    this.req = this._video.list().subscribe(data=>{
       //console.log(data.json())
-      data.json().filter(item=>{
+      data.filter(item=>{
         if(item.featured){
-          this.homeImageList.push(item)
+          let dataItem = item
+          this.homeImageList.push(dataItem)
         }
       })
       // this.homeImageList = data.json()s;

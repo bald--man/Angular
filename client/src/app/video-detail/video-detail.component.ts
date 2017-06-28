@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { VideoItem } from '../videos/video';
 import { VideoService } from '../videos/videos.service';
 
 @Component({
@@ -12,14 +13,14 @@ export class VideoDetailComponent implements OnInit, OnDestroy {
   private routeSub: any;
   private req: any;
   slug: string;
-  video: any;
+  video: VideoItem;
   constructor(private route: ActivatedRoute, private _video:VideoService) { }
 
   ngOnInit() {
     this.routeSub = this.route.params.subscribe(params => {
         this.slug = params['slug']
         this.req = this._video.get(this.slug).subscribe(data=>{
-          this.video = data
+          this.video = data as VideoItem
        })
     })
   }
