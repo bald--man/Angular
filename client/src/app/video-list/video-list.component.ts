@@ -30,8 +30,4 @@ export class VideoListComponent implements OnInit, OnDestroy {
     this.req.unsubscribe()
   }
 
-  getEmbedUrl(item){
-    return 'https://www.youtube.com/embed/' + item.embed + '?ecver=2'
-  }
-
 }
